@@ -1,14 +1,17 @@
 "use client";
 
+import { Calendar, House, Info, NotebookPen, Tickets } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+const navbarLinkStyles = "inline pr-1"
+
 const tabs = [
-  { name: "Home", href: "/" },
-  { name: "About", href: "/about" },
-  { name: "Events", href: "/events" },
-  { name: "Calendar", href: "/calendar" },
-  { name: "Planner", href: "/planner" },
+  { name: "Home", icon: <House className={navbarLinkStyles} />, href: "/" },
+  { name: "About", icon: <Info className={navbarLinkStyles}/>, href: "/about" },
+  { name: "Events", icon: <Tickets className={navbarLinkStyles}/>, href: "/events" },
+  { name: "Calendar", icon: <Calendar className={navbarLinkStyles}/>, href: "/calendar" },
+  { name: "Planner", icon: <NotebookPen className={navbarLinkStyles}/>, href: "/planner" },
 ];
 
 export default function NavTabs() {
@@ -28,7 +31,7 @@ export default function NavTabs() {
                 : "text-gray-500 hover:bg-gray-50 hover:text-black"
             }`}
           >
-            {tab.name}
+            {tab.icon} {tab.name}
           </Link>
         );
       })}
