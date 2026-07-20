@@ -24,13 +24,13 @@ const tabs = [
     href: '/calendar',
   },
   {
-    name: 'Planner',
+    name: 'Weekly Planner',
     icon: <NotebookPen className={navbarLinkStyles} />,
-    href: '/planner',
+    href: '/weekly-planner',
   },
 ];
 
-export default function NavTabs() {
+export default function Navbar() {
   const pathname = usePathname();
 
   return (
