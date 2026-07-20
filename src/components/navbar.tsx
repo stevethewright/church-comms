@@ -24,9 +24,9 @@ const tabs = [
     href: '/calendar',
   },
   {
-    name: 'Planner',
+    name: 'Weekly Planner',
     icon: <NotebookPen className={navbarLinkStyles} />,
-    href: '/planner',
+    href: '/weekly-planner',
   },
 ];
 

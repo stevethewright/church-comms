@@ -14,6 +14,7 @@ export default function EventsPage() {
         <Input type="search" placeholder="Search events..." />
         <NewEventButton />
       </div>
+      TODO: Add in table.
     </main>
   );
 }
