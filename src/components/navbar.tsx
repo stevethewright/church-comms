@@ -30,7 +30,7 @@ const tabs = [
   },
 ];
 
-export default function NavTabs() {
+export default function Navbar() {
   const pathname = usePathname();
 
   return (
