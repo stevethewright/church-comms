@@ -2,29 +2,31 @@
 
 import FullCalendar from '@fullcalendar/react';
 import themePlugin from '@fullcalendar/react/themes/breezy';
-import dayGridPlugin from '@fullcalendar/react/daygrid';
-import timeGridPlugin from '@fullcalendar/react/timegrid';
+import listPlugin from '@fullcalendar/react/list';
 
 import '@fullcalendar/react/skeleton.css';
 import '@fullcalendar/react/themes/breezy/theme.css';
 import '@fullcalendar/react/themes/breezy/palettes/indigo.css';
 
-export default function Calendar() {
+export default function WeeklyPlanner() {
   return (
     <div className="h-full">
       <FullCalendar
-        plugins={[themePlugin, dayGridPlugin, timeGridPlugin]}
+        plugins={[themePlugin, listPlugin]}
         height={'100%'}
-        initialView="dayGridMonth"
+        initialView="listWeek"
         headerToolbar={{
-          left: 'add dayGridMonth,timeGridWeek,timeGridDay',
+          left: 'add',
           center: 'title',
           right: 'prev,next today',
         }}
         buttons={{
           add: {
-            text: 'Add Event',
+            text: 'Add Event', // TODO: Can we style this like the other
             // TODO: Implement this.
+          },
+          today: {
+            text: 'Current Week',
           },
         }}
       />
