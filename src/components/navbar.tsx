@@ -19,9 +19,9 @@ const tabs = [
     href: '/calendar',
   },
   {
-    name: 'Weekly Planner',
+    name: 'Weekly Overview',
     icon: <NotebookPen className={navbarLinkStyles} />,
-    href: '/weekly-planner',
+    href: '/weekly-overview',
   },
   {
     name: 'Settings',
@@ -34,7 +34,7 @@ export default function Navbar() {
   const pathname = usePathname();
 
   return (
-    <nav className="flex flex-col gap-1 border-r border-gray-200 px-4 py-6 h-screen w-48">
+    <nav className="flex flex-col gap-1 border-r border-gray-200 px-4 py-6 h-screen w-52">
       {tabs.map((tab) => {
         const isActive = pathname === tab.href;
         return (
