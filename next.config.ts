@@ -1,5 +1,10 @@
 import type { NextConfig } from 'next';
 
-const nextConfig: NextConfig = {/* config options here */};
+import packageJson from './package.json';
+const nextConfig: NextConfig = {
+  env: {
+    APP_VERSION: packageJson.version,
+  },
+};
 
 export default nextConfig;

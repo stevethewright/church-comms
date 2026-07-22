@@ -1,18 +1,13 @@
 'use client';
 
-import { Calendar, House, Info, NotebookPen, Tickets } from 'lucide-react';
+import { Calendar, House, NotebookPen, Settings, Tickets } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 const navbarLinkStyles = 'inline pr-1';
 
 const tabs = [
-  { name: 'Home', icon: <House className={navbarLinkStyles} />, href: '/' },
-  {
-    name: 'About',
-    icon: <Info className={navbarLinkStyles} />,
-    href: '/about',
-  },
+  // { name: 'Home', icon: <House className={navbarLinkStyles} />, href: '/' },
   {
     name: 'Events',
     icon: <Tickets className={navbarLinkStyles} />,
@@ -27,6 +22,11 @@ const tabs = [
     name: 'Weekly Planner',
     icon: <NotebookPen className={navbarLinkStyles} />,
     href: '/weekly-planner',
+  },
+  {
+    name: 'Settings',
+    icon: <Settings className={navbarLinkStyles} />,
+    href: '/settings',
   },
 ];
 
@@ -51,6 +51,10 @@ export default function Navbar() {
           </Link>
         );
       })}
+      <div className="mt-auto flex flex-col">
+        <span className="mx-auto flex-1">church-comms</span>
+        <span className="mx-auto flex-2">v{process.env.APP_VERSION}</span>
+      </div>
     </nav>
   );
 }
