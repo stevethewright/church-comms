@@ -7,7 +7,7 @@ import { usePathname } from 'next/navigation';
 const navbarLinkStyles = 'inline pr-1';
 
 const tabs = [
-  { name: 'Home', icon: <House className={navbarLinkStyles} />, href: '/' },
+  // { name: 'Home', icon: <House className={navbarLinkStyles} />, href: '/' },
   {
     name: 'Events',
     icon: <Tickets className={navbarLinkStyles} />,

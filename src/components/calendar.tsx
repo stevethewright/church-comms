@@ -16,6 +16,7 @@ export default function Calendar() {
         plugins={[themePlugin, dayGridPlugin, timeGridPlugin]}
         height={'100%'}
         initialView="dayGridMonth"
+        firstDay={1}
         headerToolbar={{
           left: 'add dayGridMonth,timeGridWeek,timeGridDay',
           center: 'title',

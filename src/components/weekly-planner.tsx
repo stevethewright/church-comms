@@ -15,6 +15,7 @@ export default function WeeklyPlanner() {
         plugins={[themePlugin, listPlugin]}
         height={'100%'}
         initialView="listWeek"
+        firstDay={1}
         headerToolbar={{
           left: 'add',
           center: 'title',
