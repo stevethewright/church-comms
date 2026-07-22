@@ -51,6 +51,10 @@ export default function Navbar() {
           </Link>
         );
       })}
+      <div className="mt-auto flex flex-col">
+        <span className="mx-auto flex-1">church-comms</span>
+        <span className="mx-auto flex-2">v{process.env.APP_VERSION}</span>
+      </div>
     </nav>
   );
 }
