@@ -3,6 +3,7 @@ name: church-comms
 services:
   app:
     image: ghcr.io/stevethewright/church-comms:latest
+    container_name: church-comms
     ports:
       - "3000:3000"
   postgres:
