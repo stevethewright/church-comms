@@ -1,4 +1,4 @@
-import WeeklyOverview from '@/components/weekly-overview';
+import WeeklyOverview from "@/components/weekly-overview";
 
 export default function WeeklyOverviewPage() {
   return (

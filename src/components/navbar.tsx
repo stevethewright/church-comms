@@ -1,32 +1,32 @@
-'use client';
+"use client";
 
-import { Calendar, House, NotebookPen, Settings, Tickets } from 'lucide-react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { Calendar, House, NotebookPen, Settings, Tickets } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
-const navbarLinkStyles = 'inline pr-1';
+const navbarLinkStyles = "inline pr-1";
 
 const tabs = [
   // { name: 'Home', icon: <House className={navbarLinkStyles} />, href: '/' },
   {
-    name: 'Events',
+    name: "Events",
     icon: <Tickets className={navbarLinkStyles} />,
-    href: '/events',
+    href: "/events",
   },
   {
-    name: 'Calendar',
+    name: "Calendar",
     icon: <Calendar className={navbarLinkStyles} />,
-    href: '/calendar',
+    href: "/calendar",
   },
   {
-    name: 'Weekly Overview',
+    name: "Weekly Overview",
     icon: <NotebookPen className={navbarLinkStyles} />,
-    href: '/weekly-overview',
+    href: "/weekly-overview",
   },
   {
-    name: 'Settings',
+    name: "Settings",
     icon: <Settings className={navbarLinkStyles} />,
-    href: '/settings',
+    href: "/settings",
   },
 ];
 
@@ -43,8 +43,8 @@ export default function Navbar() {
             href={tab.href}
             className={`px-3 py-2 rounded-md text-sm font-medium ${
               isActive
-                ? 'bg-gray-100 text-black'
-                : 'text-gray-500 hover:bg-gray-50 hover:text-black'
+                ? "bg-gray-100 text-black"
+                : "text-gray-500 hover:bg-gray-50 hover:text-black"
             }`}
           >
             {tab.icon} {tab.name}
