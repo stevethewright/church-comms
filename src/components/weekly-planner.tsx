@@ -1,33 +1,33 @@
-'use client';
+"use client";
 
-import FullCalendar from '@fullcalendar/react';
-import themePlugin from '@fullcalendar/react/themes/breezy';
-import listPlugin from '@fullcalendar/react/list';
+import FullCalendar from "@fullcalendar/react";
+import themePlugin from "@fullcalendar/react/themes/breezy";
+import listPlugin from "@fullcalendar/react/list";
 
-import '@fullcalendar/react/skeleton.css';
-import '@fullcalendar/react/themes/breezy/theme.css';
-import '@fullcalendar/react/themes/breezy/palettes/indigo.css';
+import "@fullcalendar/react/skeleton.css";
+import "@fullcalendar/react/themes/breezy/theme.css";
+import "@fullcalendar/react/themes/breezy/palettes/indigo.css";
 
 export default function WeeklyPlanner() {
   return (
     <div className="h-full">
       <FullCalendar
         plugins={[themePlugin, listPlugin]}
-        height={'100%'}
+        height={"100%"}
         initialView="listWeek"
         firstDay={1}
         headerToolbar={{
-          left: 'add',
-          center: 'title',
-          right: 'prev,next today',
+          left: "add",
+          center: "title",
+          right: "prev,next today",
         }}
         buttons={{
           add: {
-            text: 'Add Event', // TODO: Can we style this like the other
+            text: "Add Event", // TODO: Can we style this like the other
             // TODO: Implement this.
           },
           today: {
-            text: 'Current Week',
+            text: "Current Week",
           },
         }}
       />
