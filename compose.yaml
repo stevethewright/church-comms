@@ -1,6 +1,10 @@
 name: church-comms
 
 services:
+  app:
+    image: ghcr.io/stevethewright/church-comms:latest
+    ports:
+      - "3000:3000"
   postgres:
     container_name: church-comms-postgres
     image: postgres:18.4

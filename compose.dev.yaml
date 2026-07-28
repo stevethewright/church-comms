@@ -1,0 +1,13 @@
+name: church-comms
+
+services:
+  app:
+    build:
+      context: .
+      target: dev
+    image: church-comms:dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./:/app
+      - /app/node_modules
