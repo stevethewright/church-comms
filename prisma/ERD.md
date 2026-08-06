@@ -43,9 +43,7 @@ erDiagram
     DateTime startsAt
     DateTime endsAt
     Boolean isAllDay
-    Int campusId
     String contactName
-    Int promotionRuleId
     String status "❓"
     Boolean isChurchCenterListing
     DateTime createdAt
@@ -63,5 +61,7 @@ erDiagram
     "PromotionChannel" |o--|o "PromotionChannel" : "parent"
     "PromotionRule" }o--|| "PromotionChannel" : "promotionChannel"
     "PromotionRule" }o--|| "PromotionCategory" : "promotionCategory"
+    "Event" }o--|| "Campus" : "campus"
+    "Event" }o--|| "PromotionRule" : "promotionRule"
     "Event" o{--}o "Tag" : ""
 ```
