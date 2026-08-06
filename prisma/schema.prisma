@@ -1,0 +1,83 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Campus {
+  id          String  @id @default(cuid())
+  name        String  @unique
+  description String?
+  address     String?
+  colour      String
+}
+
+model PromotionChannel {
+  id          String  @id @default(cuid())
+  name        String  @unique
+  description String?
+  max_events  Int?
+
+  parentId String?
+  parent   PromotionChannel?  @relation("ChannelHierarchy", fields: [parentId], references: [id])
+  children PromotionChannel[] @relation("ChannelHierarchy")
+
+  rules PromotionRule[]
+}
+
+model PromotionRule {
+  id          String  @id @default(cuid())
+  name        String  @unique
+  description String?
+  weeksBefore Int
+
+  promotionChannelId String
+  promotionChannel   PromotionChannel @relation(fields: [promotionChannelId], references: [id])
+
+  promotionCategoryId String
+  promotionCategory   PromotionCategory @relation(fields: [promotionCategoryId], references: [id])
+}
+
+model PromotionCategory {
+  id          String  @id @default(cuid())
+  name        String  @unique
+  description String?
+  category    String
+  subcategory String?
+
+  rules PromotionRule[]
+}
+
+model Event {
+  id                    String   @id @default(cuid())
+  title                 String
+  description           String?
+  location              String?
+  startsAt              DateTime
+  endsAt                DateTime
+  isAllDay              Boolean  @default(false)
+  campusId              Int
+  contactName           String
+  promotionRuleId       Int
+  status                String?
+  isChurchCenterListing Boolean  @default(false)
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+  tags                  Tag[]    @relation("EventTags")
+}
+
+model Tag {
+  id          String  @id @default(cuid())
+  name        String  @unique
+  description String?
+  colour      String
+  events      Event[] @relation("EventTags")
+}
+// hi trying to do init schema
+
+// 1 help
+// 2 check schema is real and goodf
+//3 why cant it see the postgres db?
