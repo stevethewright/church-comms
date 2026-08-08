@@ -1,0 +1,107 @@
+generator client {
+  provider        = "prisma-client"
+  output          = "../src/generated/prisma"
+  previewFeatures = ["partialIndexes"]
+}
+
+generator erd {
+  provider = "prisma-erd-generator"
+  output   = "ERD.md"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Campus {
+  id          String    @id @default(cuid())
+  name        String
+  description String?
+  address     String?
+  colour      String
+  archivedAt  DateTime?
+
+  events Event[] @relation("EventCampuses")
+
+  @@unique([name], where: { archivedAt: null })
+}
+
+model PromotionChannel {
+  id          String    @id @default(cuid())
+  name        String
+  description String?
+  maxEvents   Int?
+  archivedAt  DateTime?
+
+  parentId String?
+  parent   PromotionChannel?  @relation("ChannelHierarchy", fields: [parentId], references: [id])
+  children PromotionChannel[] @relation("ChannelHierarchy")
+
+  rules PromotionRule[]
+
+  @@unique([name], where: { archivedAt: null })
+}
+
+model PromotionRule {
+  id          String    @id @default(cuid())
+  name        String
+  description String?
+  weeksBefore Int
+  archivedAt  DateTime?
+
+  promotionChannelId String
+  promotionChannel   PromotionChannel @relation(fields: [promotionChannelId], references: [id])
+
+  promotionCategoryId String
+  promotionCategory   PromotionCategory @relation(fields: [promotionCategoryId], references: [id])
+  events              Event[]
+
+  @@unique([name], where: { archivedAt: null })
+}
+
+model PromotionCategory {
+  id          String    @id @default(cuid())
+  name        String
+  description String?
+  category    String
+  subcategory String?
+  archivedAt  DateTime?
+
+  rules PromotionRule[]
+
+  @@unique([name], where: { archivedAt: null })
+}
+
+model Event {
+  id                    String    @id @default(cuid())
+  title                 String
+  description           String?
+  location              String?
+  startsAt              DateTime
+  endsAt                DateTime
+  isAllDay              Boolean   @default(false)
+  contactName           String
+  status                String?
+  isChurchCenterListing Boolean   @default(false)
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+  archivedAt            DateTime?
+
+  promotionRuleId String
+  promotionRule   PromotionRule @relation(fields: [promotionRuleId], references: [id])
+
+  campuses Campus[] @relation("EventCampuses")
+  tags     Tag[]    @relation("EventTags")
+}
+
+model Tag {
+  id          String    @id @default(cuid())
+  name        String
+  description String?
+  colour      String
+  archivedAt  DateTime?
+
+  events Event[] @relation("EventTags")
+
+  @@unique([name], where: { archivedAt: null })
+}
