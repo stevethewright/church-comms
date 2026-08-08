@@ -21,7 +21,7 @@ model Campus {
   colour      String
   archivedAt  DateTime?
 
-  events Event[]
+  events Event[] @relation("EventCampuses")
 
   @@unique([name], where: { archivedAt: null })
 }
@@ -87,18 +87,12 @@ model Event {
   updatedAt             DateTime  @updatedAt
   archivedAt            DateTime?
 
-  campusId String?
-  campus   Campus? @relation(fields: [campusId], references: [id])
-
   promotionRuleId String
   promotionRule   PromotionRule @relation(fields: [promotionRuleId], references: [id])
 
-  tags Tag[] @relation("EventTags")
+  campuses Campus[] @relation("EventCampuses")
+  tags     Tag[]    @relation("EventTags")
 }
-
-// TODO: Look into many to many campus relationship with event instead of nullable and 1 campus only.
-// No campus means ALL
-// Then you can set 1 to many campuses to an event
 
 model Tag {
   id          String    @id @default(cuid())

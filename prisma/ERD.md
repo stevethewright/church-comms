@@ -3,65 +3,71 @@ erDiagram
 
   "Campus" {
     String id "🗝️"
-    String name
+    String name 
     String description "❓"
     String address "❓"
-    String colour
+    String colour 
+    DateTime archivedAt "❓"
     }
-
+  
 
   "PromotionChannel" {
     String id "🗝️"
-    String name
+    String name 
     String description "❓"
-    Int max_events "❓"
+    Int maxEvents "❓"
+    DateTime archivedAt "❓"
     }
-
+  
 
   "PromotionRule" {
     String id "🗝️"
-    String name
+    String name 
     String description "❓"
-    Int weeksBefore
+    Int weeksBefore 
+    DateTime archivedAt "❓"
     }
-
+  
 
   "PromotionCategory" {
     String id "🗝️"
-    String name
+    String name 
     String description "❓"
-    String category
+    String category 
     String subcategory "❓"
+    DateTime archivedAt "❓"
     }
-
+  
 
   "Event" {
     String id "🗝️"
-    String title
+    String title 
     String description "❓"
     String location "❓"
-    DateTime startsAt
-    DateTime endsAt
-    Boolean isAllDay
-    String contactName
+    DateTime startsAt 
+    DateTime endsAt 
+    Boolean isAllDay 
+    String contactName 
     String status "❓"
-    Boolean isChurchCenterListing
-    DateTime createdAt
-    DateTime updatedAt
+    Boolean isChurchCenterListing 
+    DateTime createdAt 
+    DateTime updatedAt 
+    DateTime archivedAt "❓"
     }
-
+  
 
   "Tag" {
     String id "🗝️"
-    String name
+    String name 
     String description "❓"
-    String colour
+    String colour 
+    DateTime archivedAt "❓"
     }
-
+  
+    "Campus" o{--}o "Event" : ""
     "PromotionChannel" |o--|o "PromotionChannel" : "parent"
     "PromotionRule" }o--|| "PromotionChannel" : "promotionChannel"
     "PromotionRule" }o--|| "PromotionCategory" : "promotionCategory"
-    "Event" }o--|| "Campus" : "campus"
     "Event" }o--|| "PromotionRule" : "promotionRule"
     "Event" o{--}o "Tag" : ""
 ```
