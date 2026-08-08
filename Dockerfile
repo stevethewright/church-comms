@@ -11,6 +11,7 @@ CMD ["bun", "run", "dev"]
 FROM base AS build
 RUN bun install --frozen-lockfile
 COPY . .
+RUN bunx prisma generate
 RUN bun run build
 
 FROM oven/bun:1.3.14-slim AS prod
