@@ -29,6 +29,14 @@ erDiagram
     }
   
 
+  "PromotionRuleset" {
+    String id "🗝️"
+    String name 
+    String description "❓"
+    DateTime archivedAt "❓"
+    }
+  
+
   "PromotionCategory" {
     String id "🗝️"
     String name 
@@ -68,6 +76,7 @@ erDiagram
     "PromotionChannel" |o--|o "PromotionChannel" : "parent"
     "PromotionRule" }o--|| "PromotionChannel" : "promotionChannel"
     "PromotionRule" }o--|| "PromotionCategory" : "promotionCategory"
-    "Event" }o--|| "PromotionRule" : "promotionRule"
+    "PromotionRule" }o--|o "PromotionRuleset" : "promotionRuleset"
+    "Event" }o--|| "PromotionRuleset" : "promotionRuleset"
     "Event" o{--}o "Tag" : ""
 ```
