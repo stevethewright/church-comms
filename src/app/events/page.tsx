@@ -2,8 +2,27 @@ import NewEventButton from "@/components/new-event-button";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Funnel } from "lucide-react";
+import { prisma } from "@/lib/prisma";
+import { format } from "date-fns";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 
-export default function EventsPage() {
+export default async function EventsPage() {
+  const events = await prisma.event.findMany({
+    where: { archivedAt: null },
+    include: {
+      campuses: true,
+      tags: true,
+      promotionRuleset: true,
+    },
+    orderBy: { startsAt: "asc" },
+  });
   return (
     <main>
       <h1 className="text-2xl font-bold">Events</h1>
@@ -14,7 +33,56 @@ export default function EventsPage() {
         <Input type="search" placeholder="Search events..." />
         <NewEventButton />
       </div>
-      TODO: Add in table.
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead>Title</TableHead>
+            <TableHead>Starts</TableHead>
+            <TableHead>Ends</TableHead>
+            <TableHead>Campuses</TableHead>
+            <TableHead>Tags</TableHead>
+            <TableHead>Ruleset</TableHead>
+            <TableHead>Status</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {events.map((event) => (
+            <TableRow key={event.id}>
+              <TableCell className="font-medium">{event.title}</TableCell>
+              <TableCell>
+                {event.isAllDay
+                  ? format(event.startsAt, "d MMM yyyy")
+                  : format(event.startsAt, "d MMM yyyy, h:mm a")}
+              </TableCell>
+              <TableCell>
+                {event.isAllDay
+                  ? format(event.endsAt, "d MMM yyyy")
+                  : format(event.endsAt, "d MMM yyyy, h:mm a")}
+              </TableCell>
+              <TableCell>
+                <div className="flex flex-wrap gap-1">
+                  {event.campuses.map((c) => (
+                    <Badge key={c.id} variant="outline">
+                      {c.name}
+                    </Badge>
+                  ))}
+                </div>
+              </TableCell>
+              <TableCell>
+                <div className="flex flex-wrap gap-1">
+                  {event.tags.map((t) => (
+                    <Badge key={t.id} style={{ backgroundColor: t.colour }}>
+                      {t.name}
+                    </Badge>
+                  ))}
+                </div>
+              </TableCell>
+              <TableCell>{event.promotionRuleset.name}</TableCell>
+              <TableCell>{event.status ?? "—"}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
     </main>
   );
 }

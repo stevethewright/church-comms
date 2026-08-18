@@ -6,6 +6,7 @@ const nextConfig: NextConfig = {
     APP_VERSION: packageJson.version,
   },
   output: "standalone",
+  serverExternalPackages: ["@prisma/client", "pg"],
 };
 
 export default nextConfig;
