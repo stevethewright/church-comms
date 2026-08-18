@@ -54,7 +54,21 @@ model PromotionRule {
 
   promotionCategoryId String
   promotionCategory   PromotionCategory @relation(fields: [promotionCategoryId], references: [id])
-  events              Event[]
+
+  promotionRulesetId String?
+  promotionRuleset   PromotionRuleset? @relation(fields: [promotionRulesetId], references: [id])
+
+  @@unique([name], where: { archivedAt: null })
+}
+
+model PromotionRuleset {
+  id          String    @id @default(cuid())
+  name        String
+  description String?
+  archivedAt  DateTime?
+
+  rules  PromotionRule[]
+  events Event[]
 
   @@unique([name], where: { archivedAt: null })
 }
@@ -87,8 +101,8 @@ model Event {
   updatedAt             DateTime  @updatedAt
   archivedAt            DateTime?
 
-  promotionRuleId String
-  promotionRule   PromotionRule @relation(fields: [promotionRuleId], references: [id])
+  promotionRulesetId String
+  promotionRuleset   PromotionRuleset @relation(fields: [promotionRulesetId], references: [id])
 
   campuses Campus[] @relation("EventCampuses")
   tags     Tag[]    @relation("EventTags")
