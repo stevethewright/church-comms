@@ -12,6 +12,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Badge } from "@/components/ui/badge";
 
 export default async function EventsPage() {
   const events = await prisma.event.findMany({
@@ -37,12 +38,9 @@ export default async function EventsPage() {
         <TableHeader>
           <TableRow>
             <TableHead>Title</TableHead>
-            <TableHead>Starts</TableHead>
-            <TableHead>Ends</TableHead>
+            <TableHead>Date</TableHead>
             <TableHead>Campuses</TableHead>
             <TableHead>Tags</TableHead>
-            <TableHead>Ruleset</TableHead>
-            <TableHead>Status</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -52,12 +50,7 @@ export default async function EventsPage() {
               <TableCell>
                 {event.isAllDay
                   ? format(event.startsAt, "d MMM yyyy")
-                  : format(event.startsAt, "d MMM yyyy, h:mm a")}
-              </TableCell>
-              <TableCell>
-                {event.isAllDay
-                  ? format(event.endsAt, "d MMM yyyy")
-                  : format(event.endsAt, "d MMM yyyy, h:mm a")}
+                  : format(event.startsAt, "d MMM yyyy")}
               </TableCell>
               <TableCell>
                 <div className="flex flex-wrap gap-1">
@@ -77,8 +70,6 @@ export default async function EventsPage() {
                   ))}
                 </div>
               </TableCell>
-              <TableCell>{event.promotionRuleset.name}</TableCell>
-              <TableCell>{event.status ?? "—"}</TableCell>
             </TableRow>
           ))}
         </TableBody>
